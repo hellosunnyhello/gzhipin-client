@@ -1,5 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import {HashRouter,Route,Switch} from 'react-router-dom';
 
-ReactDOM.render(<App/>,document.getElementById('root'));
+
+import App from './App';
+import Login from './containers/login/login'
+import Main from './containers/main/main'
+import Register from './containers/register/register'
+
+ReactDOM.render(
+    <HashRouter>
+        <Switch>
+            <Route path='/login' component={Login}/>
+            <Route path='/register' component={Register}/>
+            <Route component={Main}/>
+        </Switch>
+    </HashRouter>
+    ,document.getElementById('root'));
