@@ -1,10 +1,23 @@
 import React,{Component} from 'react';
 import {NavBar,WingBlank,List,WhiteSpace,Button,InputItem,Radio} from 'antd-mobile';
+
 import Logo from '../../components/logo/logo'
+
 class Register extends Component{
-
+    state = {
+        username: '',
+        password: '',
+        password2: '',
+        type: 'boss'
+    };
+    changeHandler = (name,val) =>{
+        this.setState({
+            [name]: val
+        })
+    };
     render (){
-
+        const {type} = this.state
+        const {replace} = this.props.history
         return (
             <div>
                 <NavBar>硅谷直聘注册</NavBar>
@@ -14,20 +27,20 @@ class Register extends Component{
                 <WingBlank>
                     <List>
                         <WhiteSpace />
-                        <InputItem type='text' placeholder='请输入用户名'>用户名：</InputItem>
+                        <InputItem type='text' placeholder='请输入用户名' onChange = {(val)=>this.changeHandler('username',val)}>用户名：</InputItem>
                         <WhiteSpace />
-                        <InputItem type='password' placeholder='请输入密码'>密码：</InputItem>
+                        <InputItem type='password' placeholder='请输入密码' onChange = {(val)=>this.changeHandler('password',val)}>密码：</InputItem>
                         <WhiteSpace />
-                        <InputItem type='text' placeholder='请输入确认密码'>确认密码：</InputItem>
+                        <InputItem type='text' placeholder='请输入确认密码' onChange = {(val)=>this.changeHandler('password2',val)}>确认密码：</InputItem>
                         <WhiteSpace />
                         <List.Item>
-                            <span>用户类型</span>
-                            <Radio>大神</Radio>
-                            <Radio>老板</Radio>
+                            <span>用户类型</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Radio checked={type==='dashen'} onChange={()=>this.setState({type: 'dashen'})}>大神</Radio>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Radio checked={type==='boss'} onChange={()=>this.setState({type: 'boss'})}>老板</Radio>
                         </List.Item>
                         <Button type='primary'>注&nbsp;&nbsp;&nbsp;&nbsp;册</Button>
                         <WhiteSpace />
-                        <Button>已有用户</Button>
+                        <Button onClick={()=>replace('/login')}>已有用户</Button>
                     </List>
                 </WingBlank>
             </div>
