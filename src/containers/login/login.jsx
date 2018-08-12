@@ -17,7 +17,7 @@ class Login extends Component{
         const {replace} = this.props.history
         return (
             <div>
-                <NavBar>硅谷直聘注册</NavBar>
+                <NavBar>硅谷直聘登录</NavBar>
                 <WhiteSpace />
                 <Logo/>
                 <WhiteSpace />
