@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {NavBar,WingBlank,List,WhiteSpace,Button,InputItem,Radio} from 'antd-mobile';
 
 import Logo from '../../components/logo/logo'
-
+import {reqRegister} from '../../Api'
 class Register extends Component{
     state = {
         username: '',
@@ -10,6 +10,9 @@ class Register extends Component{
         password2: '',
         type: 'boss'
     };
+    register = () => {
+        reqRegister(this.state)
+    }
     changeHandler = (name,val) =>{
         this.setState({
             [name]: val
@@ -38,7 +41,7 @@ class Register extends Component{
                             <Radio checked={type==='dashen'} onChange={()=>this.setState({type: 'dashen'})}>大神</Radio>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Radio checked={type==='boss'} onChange={()=>this.setState({type: 'boss'})}>老板</Radio>
                         </List.Item>
-                        <Button type='primary'>注&nbsp;&nbsp;&nbsp;&nbsp;册</Button>
+                        <Button type='primary' onClick={this.register}>注&nbsp;&nbsp;&nbsp;&nbsp;册</Button>
                         <WhiteSpace />
                         <Button onClick={()=>replace('/login')}>已有用户</Button>
                     </List>
