@@ -1,8 +1,10 @@
 import React,{Component} from 'react';
 import {NavBar,WingBlank,List,WhiteSpace,Button,InputItem,Radio} from 'antd-mobile';
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 import Logo from '../../components/logo/logo'
-import {reqRegister} from '../../Api'
+import {register} from '../../redux/actions'
 class Register extends Component{
     state = {
         username: '',
@@ -11,7 +13,9 @@ class Register extends Component{
         type: 'boss'
     };
     register = () => {
-        reqRegister(this.state)
+        //发送注册请求
+        this.props.register(this.state);
+
     }
     changeHandler = (name,val) =>{
         this.setState({
@@ -21,6 +25,10 @@ class Register extends Component{
     render (){
         const {type} = this.state
         const {replace} = this.props.history
+        const {msg, redirect} = this.props
+        if(redirect){
+            return <Redirect to={redirect}/>
+        }
         return (
             <div>
                 <NavBar>硅谷直聘注册</NavBar>
@@ -29,12 +37,13 @@ class Register extends Component{
                 <WhiteSpace />
                 <WingBlank>
                     <List>
+                        <p>{msg}</p>
                         <WhiteSpace />
                         <InputItem type='text' placeholder='请输入用户名' onChange = {(val)=>this.changeHandler('username',val)}>用户名：</InputItem>
                         <WhiteSpace />
                         <InputItem type='password' placeholder='请输入密码' onChange = {(val)=>this.changeHandler('password',val)}>密码：</InputItem>
                         <WhiteSpace />
-                        <InputItem type='text' placeholder='请输入确认密码' onChange = {(val)=>this.changeHandler('password2',val)}>确认密码：</InputItem>
+                        <InputItem type='password' placeholder='请输入确认密码' onChange = {(val)=>this.changeHandler('password2',val)}>确认密码：</InputItem>
                         <WhiteSpace />
                         <List.Item>
                             <span>用户类型</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -51,4 +60,7 @@ class Register extends Component{
     }
 }
 
-export default Register
+export default connect(
+    state => state.user ,
+    {register}
+)(Register)

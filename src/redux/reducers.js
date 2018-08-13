@@ -1,22 +1,22 @@
 import {combineReducers} from 'redux'
-const initaaa = {}
-function aaa(state = initaaa,action) {
+
+import {RECEIVE_DATA, RECEIVE_MSG} from './action-types'
+const initUser = {
+    username: '',
+    type: '',
+    msg: '',
+    redirect: ''
+}
+function user(state = initUser,action) {
     switch (action.type){
-
-
+        case RECEIVE_DATA:
+            return {...action.data, redirect: '/'}
+        case RECEIVE_MSG:
+            return {...state, msg: action.data}
         default:
             return state;
     }
 }
 
-const initbbb = []
-function bbb(state = initaaa,action) {
-    switch (action.type){
 
-
-        default:
-            return state;
-    }
-}
-
-export default combineReducers({aaa,bbb})
+export default combineReducers({user})
