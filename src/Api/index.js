@@ -1,5 +1,9 @@
 import ajax from './ajax'
 
-
+//注册请求后台服务器
 export const reqRegister = (user) => ajax('/register',user,'POST')
+//登录请求后台服务器
 export const reqLogin = (user) => ajax('/login',user,'POST')
+
+//更新请求后台服务器
+export const reqUpdateUser = (user) => ajax('/update',user,'POST')

@@ -5,6 +5,9 @@ import {Redirect} from 'react-router-dom'
 
 import Logo from '../../components/logo/logo'
 import {register} from '../../redux/actions'
+
+import '../../assets/css/index.less'
+
 class Register extends Component{
     state = {
         username: '',
@@ -15,7 +18,6 @@ class Register extends Component{
     register = () => {
         //发送注册请求
         this.props.register(this.state);
-
     }
     changeHandler = (name,val) =>{
         this.setState({
@@ -37,7 +39,7 @@ class Register extends Component{
                 <WhiteSpace />
                 <WingBlank>
                     <List>
-                        <p>{msg}</p>
+                        <p className='errMsg'>{msg}</p>
                         <WhiteSpace />
                         <InputItem type='text' placeholder='请输入用户名' onChange = {(val)=>this.changeHandler('username',val)}>用户名：</InputItem>
                         <WhiteSpace />
