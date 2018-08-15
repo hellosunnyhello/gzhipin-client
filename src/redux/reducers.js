@@ -1,7 +1,11 @@
 import {combineReducers} from 'redux'
 
-import {AUTH_DATA, ERROR_MSG, UPDATE_USER, UPDATE_MSG} from './action-types'
-import userInfo from '../utils'
+import {
+    AUTH_DATA,
+    ERROR_MSG,
+    RECEIVE_USER,
+    RESET_USER} from './action-types'
+import userTargetPath from '../utils'
 const initUser = {
     username: '',
     type: '',
@@ -11,13 +15,13 @@ const initUser = {
 function user(state = initUser,action) {
     switch (action.type){
         case AUTH_DATA:
-            const redirect = userInfo(action.data.type,action.data.header)
+            const redirect = userTargetPath(action.data.type,action.data.header)
             return {...action.data, redirect}
         case ERROR_MSG:
             return {...state, msg: action.data}
-        case UPDATE_USER:
+        case RECEIVE_USER:
             return action.data
-        case UPDATE_MSG:
+        case RESET_USER:
             return {...initUser, msg: action.data}
         default:
             return state;

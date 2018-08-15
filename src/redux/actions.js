@@ -1,10 +1,12 @@
-import {AUTH_DATA, ERROR_MSG, UPDATE_USER, UPDATE_MSG} from './action-types'
-import {reqRegister,reqLogin,reqUpdateUser} from '../Api'
+import {AUTH_DATA, ERROR_MSG, RECEIVE_USER, RESET_USER} from './action-types'
+import {reqRegister,reqLogin,reqUpdateUser,reqUser} from '../Api'
 
 const authData = (user) => ({type: AUTH_DATA, data: user})
 const errMsg = (msg) => ({type: ERROR_MSG, data: msg})
-const updateUser = (user) => ({type: UPDATE_USER, data: user})
-const updateMsg = (msg) => ({type: UPDATE_MSG, data: msg})
+const receiveUser = (user) => ({type: RECEIVE_USER, data: user})
+const resetUser = (msg) => ({type: RESET_USER, data: msg})
+
+
 
 //注册
 export const register = (user) =>{
@@ -62,9 +64,22 @@ export const update = (user) => {
         const response = await reqUpdateUser(user)
         const result = response.data
         if(result.code === 0){
-            dispatch(updateUser(result.data))
+            dispatch(receiveUser(result.data))
         }else {
-            dispatch(updateMsg(result.msg))
+            dispatch(resetUser(result.msg))
+        }
+    }
+}
+
+//获取用户信息
+export const getUserInfo = () => {
+    return async dispatch => {
+        const response = await reqUser()
+        const result = response.data
+        if(result.code === 0){
+            dispatch(receiveUser(result.data))
+        }else {
+            dispatch(resetUser(result.msg))
         }
     }
 }

@@ -7,3 +7,7 @@ export const reqLogin = (user) => ajax('/login',user,'POST')
 
 //更新请求后台服务器
 export const reqUpdateUser = (user) => ajax('/update',user,'POST')
+
+//获取当前的user(根据cookie)
+
+export const reqUser = () => ajax('/user')

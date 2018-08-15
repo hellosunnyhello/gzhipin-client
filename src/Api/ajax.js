@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function (url,data,type='GET') {
+export default function (url,data={},type='GET') {
     if(type==='GET'){
         let subUrl = '';
         //Object.keys(对象)返回一个对象本身的属性名组成的数组
@@ -11,7 +11,7 @@ export default function (url,data,type='GET') {
         if(subUrl){
             subUrl = subUrl.substring(0,subUrl.length-1)
         }
-        return axios.post(`${url}?${subUrl}`)
+        return axios.get(`${url}?${subUrl}`)
     }else if(type==='POST'){
         return axios.post(url,data)
     }

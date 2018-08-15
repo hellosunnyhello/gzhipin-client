@@ -1,4 +1,4 @@
-function userInfo(type,header) {
+function userTargetPath(type,header) {
     let path = '/'
     if(type==='dashen'){
         path += 'dashen'
@@ -12,4 +12,4 @@ function userInfo(type,header) {
     return path
 }
 
-export default userInfo
+export default userTargetPath
