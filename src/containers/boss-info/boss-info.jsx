@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom'
 
 import HeaderSelector from '../../components/header-selector/header-selector'
 import {update} from '../../redux/actions'
+import '../../assets/css/index.less'
 class BossInfo extends Component{
     state = {
         header: '', // 头像名称
@@ -26,7 +27,7 @@ class BossInfo extends Component{
         this.props.update(this.state)
     }
     render (){
-        const {header} = this.props
+        const {header,msg} = this.props
         console.log(this.props)
         if(header){
 
@@ -42,6 +43,7 @@ class BossInfo extends Component{
                     <InputItem placeholder='请输入职位薪资' onChange={(val)=>this.clickHandler('salary',val)}>职位薪资</InputItem>
                     <TextareaItem title='职位要求' placeholder='请输入职位要求' onChange={(val)=>this.clickHandler('info',val)} rows={3}/>
                 </WingBlank>
+                <p className='errMsg'>{msg}</p>
                 <Button type='primary' onClick={this.saveInfo}>保存</Button>
             </div>
         )

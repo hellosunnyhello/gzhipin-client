@@ -5,7 +5,7 @@ class Message extends Component{
     render (){
 
         return (
-            <div>message</div>
+            <div className='content-postion'><h1>hahha</h1></div>
         )
     }
 }

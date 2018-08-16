@@ -4,7 +4,8 @@ import {
     AUTH_DATA,
     ERROR_MSG,
     RECEIVE_USER,
-    RESET_USER} from './action-types'
+    RESET_USER,
+    RECEIVE_USER_LIST} from './action-types'
 import userTargetPath from '../utils'
 const initUser = {
     username: '',
@@ -24,8 +25,18 @@ function user(state = initUser,action) {
         case RESET_USER:
             return {...initUser, msg: action.data}
         default:
-            return state;
+            return state
     }
 }
 
-export default combineReducers({user})
+const initUserList = []
+function userList(state=initUserList,action) {
+    switch (action.type){
+        case RECEIVE_USER_LIST:
+            return action.data
+        default:
+            return state
+    }
+}
+
+export default combineReducers({user,userList})

@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom'
 
 import HeaderSelector from '../../components/header-selector/header-selector'
 import {update} from '../../redux/actions'
+import '../../assets/css/index.less'
 class DashenInfo extends Component{
     state = {
         header: '', // 头像名称
@@ -24,7 +25,7 @@ class DashenInfo extends Component{
         this.props.update(this.state)
     }
     render (){
-        const {header} = this.props
+        const {header,msg} = this.props
         console.log(this.props)
         if(header){
             return <Redirect to='/dashen'/>
@@ -37,6 +38,7 @@ class DashenInfo extends Component{
                     <InputItem placeholder='请输入求职岗位' onChange={(val)=>this.clickHandler('post',val)}>求职岗位</InputItem>
                     <TextareaItem title='个人介绍' placeholder='请输入个人介绍' onChange={(val)=>this.clickHandler('info',val)} rows={3}/>
                 </WingBlank>
+                <p className='errMsg'>{msg}</p>
                 <Button type='primary' onClick={this.saveInfo}>保存</Button>
             </div>
         )
