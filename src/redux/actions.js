@@ -6,6 +6,9 @@ import {
     RECEIVE_USER_LIST} from './action-types'
 import {reqRegister,reqLogin,reqUpdateUser,reqUser,reqUserList} from '../Api'
 
+import io from 'socket.io-client'
+
+
 const authData = (user) => ({type: AUTH_DATA, data: user})
 const errMsg = (msg) => ({type: ERROR_MSG, data: msg})
 const receiveUser = (user) => ({type: RECEIVE_USER, data: user})
@@ -102,5 +105,18 @@ export const getUserList = (type) => {
         if(result.code===0){
             dispatch(receiveUserList(result.data))
         }
+    }
+}
+
+//发送聊天消息的异步action
+const socket = io('ws://localhost:4000')
+socket.on('receiveMsg',function (charMsg) {
+    console.log('接收服务器返回的消息',charMsg)
+})
+export const sendMsg = ({content, from, to}) => {
+    return dispatch => {
+        //浏览器向服务器发送消息，消息名，消息内容
+        socket.emit('sendMsg',{content, from, to})
+        console.log('浏览器向服务器发送消息',{content, from, to})
     }
 }

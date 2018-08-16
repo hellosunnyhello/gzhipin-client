@@ -12,6 +12,7 @@ import Boss from '../boss/boss'
 import Dashen from '../dashen/dashen'
 import Personal from '../personal/personal'
 import Message from '../message/message'
+import Chat from '../chat/chat'
 import NotFound from '../../components/not-found/not-found'
 import NavFooter from '../../components/nav-footer/nav-footer'
 
@@ -74,8 +75,14 @@ class Main extends Component{
                 return <Redirect to={targetPath} />
             }
             if(type==='boss'){
+                if(path==='/dashen'){
+                    return <Redirect to='/boss' />
+                }
                 this.navList[1].hide = true
             }else {
+                if(path==='/boss'){
+                    return <Redirect to='/dashen' />
+                }
                 this.navList[0].hide = true
             }
         }
@@ -90,6 +97,7 @@ class Main extends Component{
                     <Route path='/boss' component={Boss}/>
                     <Route path='/message' component={Message}/>
                     <Route path='/personal' component={Personal}/>
+                    <Route path='/chat/:userid' component={Chat}/>
                     <Route component={NotFound}/>
                 </Switch>
                 {currentNav ? <NavFooter navList = {this.navList}/> : null}
