@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {Route,Switch,Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Cookies from 'js-cookie'
+import {NavBar} from 'antd-mobile'
 
 import {getUserInfo} from '../../redux/actions'
 import userTargetPath from '../../utils'
@@ -12,6 +13,9 @@ import Dashen from '../dashen/dashen'
 import Personal from '../personal/personal'
 import Message from '../message/message'
 import NotFound from '../../components/not-found/not-found'
+import NavFooter from '../../components/nav-footer/nav-footer'
+
+import '../../assets/css/index.less'
 
 class Main extends Component{
     navList = [
@@ -56,11 +60,12 @@ class Main extends Component{
     render (){
         const user_id = Cookies.get('user_id')
         const {_id,type,header} = this.props.user
-
+        const path = this.props.location.pathname
+        const currentNav = this.navList.find((nav,index)=> path===nav.path)
         if(!user_id){
             return <Redirect to='/login'/>
         }
-        const path = this.props.location.pathname
+
         if(!_id){
             return null
         }else {
@@ -68,11 +73,16 @@ class Main extends Component{
                 const targetPath = userTargetPath(type, header)
                 return <Redirect to={targetPath} />
             }
+            if(type==='boss'){
+                this.navList[1].hide = true
+            }else {
+                this.navList[0].hide = true
+            }
         }
 
         return (
             <div>
-
+                {currentNav ? <NavBar>{currentNav.title}</NavBar> : null}
                 <Switch>
                     <Route path='/bossinfo' component={BossInfo}/>
                     <Route path='/dasheninfo' component={DashenInfo}/>
@@ -82,6 +92,7 @@ class Main extends Component{
                     <Route path='/personal' component={Personal}/>
                     <Route component={NotFound}/>
                 </Switch>
+                {currentNav ? <NavFooter navList = {this.navList}/> : null}
             </div>
 
         )

@@ -25,12 +25,13 @@ class Register extends Component{
         })
     };
     render (){
-        const {type} = this.state
+        const {type,username,password} = this.state
         const {replace} = this.props.history
-        const {msg, redirect} = this.props
+        const {msg, redirect, _id,login} = this.props
         if(redirect){
             return <Redirect to={redirect}/>
         }
+
         return (
             <div>
                 <NavBar>硅谷直聘注册</NavBar>

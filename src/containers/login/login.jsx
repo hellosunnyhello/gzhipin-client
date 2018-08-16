@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {NavBar,WingBlank,List,WhiteSpace,Button,InputItem} from 'antd-mobile';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import {login} from '../../redux/actions'
 import Logo from '../../components/logo/logo'
@@ -22,11 +23,9 @@ class Login extends Component{
         this.props.login(this.state)
     }
     render (){
-
         const {replace} = this.props.history
         const {msg,redirect} = this.props
         if(redirect){
-            console.log(redirect)
             return <Redirect to={redirect}/>
         }
         return (

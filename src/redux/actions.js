@@ -26,6 +26,7 @@ export const register = (user) =>{
         const result = response.data //{code: 0, data: {}}
         //分发同步action
         if(result.code===0){
+            /*dispatch(authData(result.data))*/
             dispatch(authData(result.data))
         }else {
             //分发同步action
@@ -48,6 +49,7 @@ export const login = (user) =>{
         const result = response.data //{code: 0, data: {}}
         //分发同步action
         if(result.code===0){
+            console.log(result.data)
             dispatch(authData(result.data))
         }else {
             //分发同步action
