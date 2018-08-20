@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom'
 
 import HeaderSelector from '../../components/header-selector/header-selector'
 import {update} from '../../redux/actions'
-import '../../assets/css/index.less'
+// import '../../assets/css/index.less'
 class DashenInfo extends Component{
     state = {
         header: '', // 头像名称

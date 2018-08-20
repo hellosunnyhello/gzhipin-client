@@ -16,7 +16,7 @@ import Chat from '../chat/chat'
 import NotFound from '../../components/not-found/not-found'
 import NavFooter from '../../components/nav-footer/nav-footer'
 
-import '../../assets/css/index.less'
+// import '../../assets/css/index.less'
 
 class Main extends Component{
     navList = [
@@ -100,7 +100,7 @@ class Main extends Component{
                     <Route path='/chat/:userid' component={Chat}/>
                     <Route component={NotFound}/>
                 </Switch>
-                {currentNav ? <NavFooter navList = {this.navList}/> : null}
+                {currentNav ? <NavFooter navList = {this.navList} unReadCount={this.props.unReadCount}/> : null}
             </div>
 
         )
@@ -108,6 +108,6 @@ class Main extends Component{
 }
 
 export default connect(
-    (state)=> ({user: state.user}),
+    (state)=> ({user: state.user,unReadCount: state.chat.unReadCount}),
     {getUserInfo}
 )(Main)

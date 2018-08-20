@@ -14,3 +14,8 @@ export const reqUser = () => ajax('/user')
 //根据当前用户类型获取用户列表
 export const reqUserList = (type) => ajax('/userlist',{type})
 
+//获取当前用户的聊天消息列表](#6获取当前用户的聊天消息列表
+export const reqChatMsgList = () => ajax('/msglist')
+// 修改指定消息为已读](#7修改指定消息为已读)
+export const reqReadChatMsg = (from) => ajax('/readmsg',{from},'POST')
+

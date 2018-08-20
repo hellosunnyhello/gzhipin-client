@@ -6,7 +6,7 @@ import {Redirect} from 'react-router-dom'
 import Logo from '../../components/logo/logo'
 import {register} from '../../redux/actions'
 
-import '../../assets/css/index.less'
+// import '../../assets/css/index.less'
 
 class Register extends Component{
     state = {

@@ -7,7 +7,7 @@ import Cookies from 'js-cookie'
 import {login} from '../../redux/actions'
 import Logo from '../../components/logo/logo'
 
-import '../../assets/css/index.less'
+// import '../../assets/css/index.less'
 
 class Login extends Component{
     state = {
